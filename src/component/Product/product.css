@@ -1,0 +1,13 @@
+.product {
+  display: flex;
+  border-bottom: 1px solid black;
+  margin: 5px 10px 5px 5px;
+  padding: 10px 0;
+}
+.cartBtn {
+  background-color: rgb(202, 150, 17);
+  width: 150px;
+  height: 30px;
+  border: 1px solid rgb(104, 105, 2);
+  border-radius: 5px;
+}
