@@ -20,6 +20,7 @@ const Shop = () => {
           <Product product={item} handleAddProduct={addProduct}></Product>
         ))}
       </div>
+
       <div className='cart-container'>
         <h1>Cart Length: {cart.length}</h1>
       </div>
