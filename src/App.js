@@ -1,13 +1,14 @@
-import './App.css';
-import Header from './component/Header/Header';
-import Shop from './component/Shop/Shop';
-
+import "./App.css";
+import Header from "./component/Header/Header";
+import Shop from "./component/Shop/Shop";
 
 function App() {
   return (
     <div>
-     <Header />
-     <Shop />
+      <Header />
+      <div className='container'>
+        <Shop />
+      </div>
     </div>
   );
 }

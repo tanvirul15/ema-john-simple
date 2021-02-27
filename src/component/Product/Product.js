@@ -7,18 +7,17 @@ const Product = (props) => {
   const { img, name, seller, price, stock } = props.product;
   console.log(props);
   return (
-    <div className='product'>
-      <div>
+    <div className='product card'>
+      <div className='me-3'>
         <img src={img} alt='' />
       </div>
 
       <div>
-        <h4 className='product-name'>Name: {name}</h4>
+        <h6 className='product-name'>{name}</h6>
         <p>
           <small>by: {seller}</small>
         </p>
         <p>$ {price}</p>
-        <br />
         <p>
           <small>Only {stock} left in stock</small>
         </p>

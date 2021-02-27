@@ -1,8 +1,12 @@
 .product {
-  display: flex;
+  /* display: flex;
   border-bottom: 1px solid black;
   margin: 5px 10px 5px 5px;
-  padding: 10px 0;
+  padding: 10px 0; */
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  margin: 10px 0;
 }
 .cartBtn {
   background-color: rgb(202, 150, 17);
