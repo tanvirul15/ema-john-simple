@@ -1,12 +1,10 @@
-import React from "react";
-import "./product.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { Link, Router } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Product = (props) => {
-  const { img, name, seller, price, stock, key } = props.product;
-
+const ReviewItem = (props) => {
+  const { img, name, seller, price, stock, key, quantity } = props.product;
   return (
     <div className="product card">
       <div className="me-3">
@@ -37,4 +35,4 @@ const Product = (props) => {
   );
 };
 
-export default Product;
+export default ReviewItem;
