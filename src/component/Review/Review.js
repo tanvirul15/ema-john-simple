@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
 import fakeData from "../../fakeData";
-import { getDatabaseCart } from "../../utilities/databaseManager";
+import { getDatabaseCart, removeFromDatabaseCart } from "../../utilities/databaseManager";
+import Cart from "../Cart/Cart";
 import ReviewItem from "../ReviewItem/ReviewItem";
 
 const Review = () => {
   const [cart, setCart] = useState([]);
+
+  const removeProduct = function (productID) {
+    const tempCart = cart.filter((cartItem) => cartItem.key !== productID);
+    setCart(tempCart);
+    removeFromDatabaseCart(productID);
+  };
+
   useEffect(() => {
     const savedCart = getDatabaseCart();
     const productKeys = Object.keys(savedCart);
@@ -17,10 +25,15 @@ const Review = () => {
     setCart(cartProduct);
   }, []);
   return (
-    <div>
-      {cart.map((cartItem) => (
-        <ReviewItem product={cartItem}></ReviewItem>
-      ))}
+    <div className='shop-container'>
+      <div className='product-container'>
+        {cart.map((cartItem) => (
+          <ReviewItem product={cartItem} removeProduct={removeProduct}></ReviewItem>
+        ))}
+      </div>
+      <div className='cart-container'>
+        <Cart cart={cart} />
+      </div>
     </div>
   );
 };
