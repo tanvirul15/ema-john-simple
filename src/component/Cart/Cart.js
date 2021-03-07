@@ -4,10 +4,13 @@ import "./Cart.css";
 
 const Cart = (props) => {
   const cart = props.cart;
+
   let total = 0;
+  let quantity = 0;
 
   cart.forEach((item) => {
-    total += item.price;
+    total += item.price * item.quantity;
+    quantity += item.quantity;
   });
   let shippingCost = total > 35 ? 0 : total > 15 ? 4 : total === 0 ? 0 : 6;
 
@@ -17,7 +20,7 @@ const Cart = (props) => {
   return (
     <div className="card p-5 m-4 text-center sticky-top">
       <h4>Order Summary</h4>
-      <p>Item Ordered: {cart.length}</p>
+      <p>Item Ordered: {quantity}</p>
       <p>Total Price: {total.toFixed(2)} $</p>
       <p>Shipping cost: {shippingCost.toFixed(2)} $</p>
       <p>Vat: {vat.toFixed(2)}</p>
