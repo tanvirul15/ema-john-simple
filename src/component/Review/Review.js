@@ -1,17 +1,35 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import fakeData from "../../fakeData";
-import { getDatabaseCart, removeFromDatabaseCart } from "../../utilities/databaseManager";
+import { getDatabaseCart, processOrder, removeFromDatabaseCart } from "../../utilities/databaseManager";
 import Cart from "../Cart/Cart";
 import ReviewItem from "../ReviewItem/ReviewItem";
 
 const Review = () => {
+  /**
+   * ---------------------Variables Declearation
+   */
   const [cart, setCart] = useState([]);
+  const histry = useHistory();
 
+  /**
+   * ---------------------Handeler Method
+   */
   const removeProduct = function (productID) {
     const tempCart = cart.filter((cartItem) => cartItem.key !== productID);
     setCart(tempCart);
     removeFromDatabaseCart(productID);
   };
+
+  const handlePlaceOrder = function () {
+    histry.push("/shipment");
+    // processOrder();
+    // setCart([]);
+  };
+
+  /**
+   * ---------------------Handeler Method
+   */
 
   useEffect(() => {
     const savedCart = getDatabaseCart();
@@ -24,6 +42,10 @@ const Review = () => {
     });
     setCart(cartProduct);
   }, []);
+
+  /**
+   * ---------------------Return
+   */
   return (
     <div className='shop-container'>
       <div className='product-container'>
@@ -32,7 +54,11 @@ const Review = () => {
         ))}
       </div>
       <div className='cart-container'>
-        <Cart cart={cart} />
+        <Cart cart={cart}>
+          <button className='cartBtn' onClick={handlePlaceOrder}>
+            Ship Order
+          </button>
+        </Cart>
       </div>
     </div>
   );

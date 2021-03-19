@@ -18,16 +18,14 @@ const Cart = (props) => {
   let grandTotal = total + shippingCost + vat;
 
   return (
-    <div className="card p-5 m-4 text-center sticky-top">
+    <div className='card p-5 m-4 text-center sticky-top'>
       <h4>Order Summary</h4>
       <p>Item Ordered: {quantity}</p>
       <p>Total Price: {total.toFixed(2)} $</p>
       <p>Shipping cost: {shippingCost.toFixed(2)} $</p>
       <p>Vat: {vat.toFixed(2)}</p>
       <p>Grand Total: {grandTotal.toFixed(2)}</p>
-      <Link to="/review">
-        <button className="cartBtn">Review Order</button>
-      </Link>
+      {props.children}
     </div>
   );
 };
