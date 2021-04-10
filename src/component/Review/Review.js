@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import fakeData from "../../fakeData";
-import { getDatabaseCart, processOrder, removeFromDatabaseCart } from "../../utilities/databaseManager";
+
+import { getDatabaseCart, removeFromDatabaseCart } from "../../utilities/databaseManager";
 import Cart from "../Cart/Cart";
 import ReviewItem from "../ReviewItem/ReviewItem";
 
@@ -23,8 +23,6 @@ const Review = () => {
 
   const handlePlaceOrder = function () {
     histry.push("/shipment");
-    // processOrder();
-    // setCart([]);
   };
 
   /**
@@ -35,12 +33,18 @@ const Review = () => {
     const savedCart = getDatabaseCart();
     const productKeys = Object.keys(savedCart);
 
-    const cartProduct = productKeys.map((key) => {
-      const product = fakeData.find((pd) => pd.key === key);
-      product.quantity = savedCart[key];
-      return product;
-    });
-    setCart(cartProduct);
+    fetch("http://localhost:5000/getCartProduct", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(productKeys),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        for (let i = 0; i < data.length; i++) {
+          data[i].quantity = savedCart[data[i].key];
+        }
+        setCart(data);
+      });
   }, []);
 
   /**
@@ -50,7 +54,7 @@ const Review = () => {
     <div className='shop-container'>
       <div className='product-container'>
         {cart.map((cartItem) => (
-          <ReviewItem product={cartItem} removeProduct={removeProduct}></ReviewItem>
+          <ReviewItem key={cartItem.key} product={cartItem} removeProduct={removeProduct}></ReviewItem>
         ))}
       </div>
       <div className='cart-container'>

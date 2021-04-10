@@ -5,7 +5,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import firebaseConfig from "../../firebaseConfig";
-import { useState } from "react";
+
 import { userContext } from "../../App";
 import { useHistory, useLocation } from "react-router";
 
@@ -14,7 +14,7 @@ const Login = () => {
 
   let history = useHistory();
   let location = useLocation();
-  console.log(location);
+
   let { from } = location.state || { from: { pathname: "/" } };
 
   if (!firebase.apps.length) {
@@ -36,17 +36,17 @@ const Login = () => {
       });
   };
 
-  const handleGoogleLogin = () => {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then((result) => {
-        /** @type {firebase.auth.OAuthCredential} */
-        var user = result.user;
-      })
-      .catch((err) => console.log("Tanvir", err));
-  };
+  // const handleGoogleLogin = () => {
+  //   var provider = new firebase.auth.GoogleAuthProvider();
+  //   firebase
+  //     .auth()
+  //     .signInWithPopup(provider)
+  //     .then((result) => {
+  //       /** @type {firebase.auth.OAuthCredential} */
+  //       var user = result.user;
+  //     })
+  //     .catch((err) => console.log("Tanvir", err));
+  // };
 
   const createProfile = () => {
     const email = document.getElementById("email").value;
